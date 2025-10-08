@@ -3,13 +3,13 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 .utmp/
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Uu]ser[Ss]ettings/
+/PuzzleGame/[Ll]ibrary/
+/PuzzleGame/[Tt]emp/
+/PuzzleGame/[Oo]bj/
+/PuzzleGame/[Bb]uild/
+/PuzzleGame/[Bb]uilds/
+/PuzzleGame/[Ll]ogs/
+/PuzzleGame/[Uu]ser[Ss]ettings/
 *.log
 
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
@@ -81,13 +81,13 @@ InitTestScene*.unity*
 
 # Addressables default ignores, before user customizations
 /ServerData
-/[Aa]ssets/StreamingAssets/aa*
-/[Aa]ssets/AddressableAssetsData/link.xml*
-/[Aa]ssets/Addressables_Temp*
+/PuzzleGame/[Aa]ssets/StreamingAssets/aa*
+/PuzzleGame/[Aa]ssets/AddressableAssetsData/link.xml*
+/PuzzleGame/[Aa]ssets/Addressables_Temp*
 # By default, Addressables content builds will generate addressables_content_state.bin
 # files in platform-specific subfolders, for example:
 # /Assets/AddressableAssetsData/OSX/addressables_content_state.bin
-/[Aa]ssets/AddressableAssetsData/*/*.bin*
+/PuzzleGame/[Aa]ssets/AddressableAssetsData/*/*.bin*
 
 # Visual Scripting auto-generated files
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db

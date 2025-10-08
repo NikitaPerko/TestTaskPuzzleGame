@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Runtime.Features.Game;
 using Runtime.Features.Game.Ui.MainMenu;
+using Runtime.Features.Game.Ui.StartPuzzlePanel;
 using Runtime.Infrastructure;
 
 namespace Runtime.Features.ProjectStates
@@ -27,10 +29,35 @@ namespace Runtime.Features.ProjectStates
             _mainMenuScreen.EventPuzzleSelected += OnEventPuzzleSelected;
         }
 
-        private void OnEventPuzzleSelected(int size)
+        private void OnEventPuzzleSelected(int size, StartPuzzleType startPuzzleType)
         {
-            _stateMachine.SetCurrentStateWithData<GameState, GameState.GameStateData>(
-                new GameState.GameStateData {Size = size});
+            switch (startPuzzleType)
+            {
+                case StartPuzzleType.Free:
+                    _stateMachine.SetCurrentStateWithData<GameState, GameState.GameStateData>(
+                        new GameState.GameStateData {Size = size});
+
+                    break;
+                case StartPuzzleType.Paid:
+                    //
+                    //
+                    // Data.Money -= price;
+                    //
+                    _stateMachine.SetCurrentStateWithData<GameState, GameState.GameStateData>(
+                        new GameState.GameStateData {Size = size});
+
+                    break;
+                case StartPuzzleType.ForAd:
+                    //
+                    //  Advertisement.ShowInterstitial(OnComplete: ()=>{
+                    //_stateMachine.SetCurrentStateWithData<GameState, GameState.GameStateData>(
+                    //    new GameState.GameStateData {Size = size});
+                    // })
+                    //
+
+                    break;
+                default: throw new ArgumentOutOfRangeException(nameof(startPuzzleType), startPuzzleType, null);
+            }
         }
 
         public override void OnExit()

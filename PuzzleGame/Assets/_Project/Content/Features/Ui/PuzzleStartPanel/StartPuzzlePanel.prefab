@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3839583952115160851}
   - component: {fileID: 5764516312452862196}
   m_Layer: 5
-  m_Name: PayedStartButton
+  m_Name: PaidStartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -775,7 +775,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start for coins
+  m_text: Start for 30 coins
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1198,7 +1198,7 @@ MonoBehaviour:
   - {fileID: 4394864621562043810}
   _closeButton: {fileID: 7758117144938808952}
   _freeStartButton: {fileID: 1325349459511003522}
-  _payedStartButton: {fileID: 5764516312452862196}
+  _paidStartButton: {fileID: 5764516312452862196}
   _advertisementStartButton: {fileID: 1478585040007097920}
 --- !u!1 &2220359828758708641
 GameObject:
@@ -3067,7 +3067,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start for ad
+  m_text: Watch ad
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

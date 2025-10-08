@@ -27,7 +27,7 @@ namespace Runtime.Features.Game.Ui.StartPuzzlePanel
         private Button _freeStartButton;
 
         [SerializeField]
-        private Button _payedStartButton;
+        private Button _paidStartButton;
 
         [SerializeField]
         private Button _advertisementStartButton;
@@ -36,10 +36,11 @@ namespace Runtime.Features.Game.Ui.StartPuzzlePanel
 
         private readonly CancellationTokenSourceWrapper _openCloseTokenSource = new();
 
-        public event Action<int> EventStartPuzzleButtonClicked;
+        public event Action<int, StartPuzzleType> EventStartPuzzleButtonClicked;
 
         public void Show(Info showInfo)
         {
+            _currentSizeButton = null;
             _openCloseTokenSource.CancelAndDispose();
             gameObject.SetActive(true);
             foreach (var sizeButton in _sizeButtons)
@@ -50,7 +51,7 @@ namespace Runtime.Features.Game.Ui.StartPuzzlePanel
 
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
             _freeStartButton.onClick.AddListener(OnFreeStartButtonClicked);
-            _payedStartButton.onClick.AddListener(OnPayedStartButtonClicked);
+            _paidStartButton.onClick.AddListener(OnPaidStartButtonClicked);
             _advertisementStartButton.onClick.AddListener(OnAdvertisementStartButtonClicked);
             _canvasGroup.alpha = 1f;
             _image.sprite = showInfo.Image;
@@ -67,7 +68,7 @@ namespace Runtime.Features.Game.Ui.StartPuzzlePanel
 
             _closeButton.onClick.RemoveListener(OnCloseButtonClicked);
             _freeStartButton.onClick.RemoveListener(OnFreeStartButtonClicked);
-            _payedStartButton.onClick.RemoveListener(OnPayedStartButtonClicked);
+            _paidStartButton.onClick.RemoveListener(OnPaidStartButtonClicked);
             _advertisementStartButton.onClick.RemoveListener(OnAdvertisementStartButtonClicked);
             _canvasGroup.alpha = 0f;
             gameObject.SetActive(false);
@@ -87,7 +88,7 @@ namespace Runtime.Features.Game.Ui.StartPuzzlePanel
 
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
             _freeStartButton.onClick.AddListener(OnFreeStartButtonClicked);
-            _payedStartButton.onClick.AddListener(OnPayedStartButtonClicked);
+            _paidStartButton.onClick.AddListener(OnPaidStartButtonClicked);
             _advertisementStartButton.onClick.AddListener(OnAdvertisementStartButtonClicked);
 
             await Sequence.Create()
@@ -107,7 +108,7 @@ namespace Runtime.Features.Game.Ui.StartPuzzlePanel
 
             _closeButton.onClick.RemoveListener(OnCloseButtonClicked);
             _freeStartButton.onClick.RemoveListener(OnFreeStartButtonClicked);
-            _payedStartButton.onClick.RemoveListener(OnPayedStartButtonClicked);
+            _paidStartButton.onClick.RemoveListener(OnPaidStartButtonClicked);
             _advertisementStartButton.onClick.RemoveListener(OnAdvertisementStartButtonClicked);
 
             await Sequence.Create()
@@ -146,17 +147,17 @@ namespace Runtime.Features.Game.Ui.StartPuzzlePanel
                 return;
             }
 
-            EventStartPuzzleButtonClicked?.Invoke(_currentSizeButton.Size);
+            EventStartPuzzleButtonClicked?.Invoke(_currentSizeButton.Size, StartPuzzleType.Free);
         }
 
-        private void OnPayedStartButtonClicked()
+        private void OnPaidStartButtonClicked()
         {
             if (_currentSizeButton == null)
             {
                 return;
             }
 
-            EventStartPuzzleButtonClicked?.Invoke(_currentSizeButton.Size);
+            EventStartPuzzleButtonClicked?.Invoke(_currentSizeButton.Size, StartPuzzleType.Paid);
         }
 
         private void OnAdvertisementStartButtonClicked()
@@ -166,7 +167,7 @@ namespace Runtime.Features.Game.Ui.StartPuzzlePanel
                 return;
             }
 
-            EventStartPuzzleButtonClicked?.Invoke(_currentSizeButton.Size);
+            EventStartPuzzleButtonClicked?.Invoke(_currentSizeButton.Size, StartPuzzleType.ForAd);
         }
 
         public class Info

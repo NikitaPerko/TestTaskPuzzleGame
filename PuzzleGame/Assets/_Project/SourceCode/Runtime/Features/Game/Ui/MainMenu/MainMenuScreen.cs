@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Runtime.Features.Game.Ui.StartPuzzlePanel;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -20,7 +21,7 @@ namespace Runtime.Features.Game.Ui.MainMenu
 
         private List<PuzzleLevelButton> _puzzleLevelButtons = new();
 
-        public event Action<int> EventPuzzleSelected;
+        public event Action<int, StartPuzzleType> EventPuzzleSelected;
 
         public async override UniTask ShowAsync(Info info = null, CancellationToken cancellationToken = default)
         {
@@ -37,7 +38,7 @@ namespace Runtime.Features.Game.Ui.MainMenu
 
         public async override UniTask HideAsync(CancellationToken cancellationToken = default)
         {
-            _startPuzzlePanel.EventStartPuzzleButtonClicked += OnEventStartPuzzleButtonClicked;
+            _startPuzzlePanel.EventStartPuzzleButtonClicked -= OnEventStartPuzzleButtonClicked;
             foreach (var puzzleLevelButton in _puzzleLevelButtons)
             {
                 puzzleLevelButton.Deinitialize();
@@ -52,9 +53,9 @@ namespace Runtime.Features.Game.Ui.MainMenu
             gameObject.SetActive(false);
         }
 
-        private void OnEventStartPuzzleButtonClicked(int size)
+        private void OnEventStartPuzzleButtonClicked(int size, StartPuzzleType startPuzzleType)
         {
-            EventPuzzleSelected?.Invoke(size);
+            EventPuzzleSelected?.Invoke(size, startPuzzleType);
         }
 
         private void OnPuzzleLevelClicked(PuzzleLevelButton obj, LevelConfig config)

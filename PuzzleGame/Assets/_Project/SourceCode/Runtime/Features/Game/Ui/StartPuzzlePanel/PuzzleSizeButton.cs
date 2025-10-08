@@ -19,6 +19,7 @@ namespace Runtime.Features.Game.Ui.StartPuzzlePanel
         public void Initialize()
         {
             _button.onClick.AddListener(OnButtonClicked);
+            SetUnselected();
         }
 
         public void Deinitialize()
